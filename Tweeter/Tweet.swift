@@ -14,6 +14,9 @@ class Tweet: NSObject {
     var createdAt: NSDate?
     var retweet: Int?
     var like: Int?
+    var id: String?
+    var isLiked: Bool?
+    var isRetweeted: Bool?
     
     init(dictionary: NSDictionary) {
         user = User(dictionary: dictionary["user"] as! NSDictionary)
@@ -27,6 +30,11 @@ class Tweet: NSObject {
         var formatter = NSDateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         createdAt = formatter.dateFromString(createdAtString!)
+        
+        id = dictionary["id_str"] as? String
+        
+        isLiked = dictionary["favorited"] as? Bool
+        isRetweeted = dictionary["retweeted"] as? Bool
     }
     
     

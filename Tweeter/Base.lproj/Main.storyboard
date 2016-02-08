@@ -106,12 +106,15 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9dD-n3-0Ce">
-                                                    <rect key="frame" x="21" y="125" width="20" height="19"/>
+                                                    <rect key="frame" x="21" y="125" width="20" height="19.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="nU2-yb-Xsw"/>
                                                         <constraint firstAttribute="width" constant="20" id="pWu-1W-VWt"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="retweet-action"/>
+                                                    <connections>
+                                                        <action selector="onRetweet:" destination="8zs-h5-q1U" eventType="touchUpInside" id="aSr-Ld-vBv"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="roT-gN-nq8">
                                                     <rect key="frame" x="122" y="125" width="15" height="20"/>
@@ -120,6 +123,9 @@
                                                         <constraint firstAttribute="height" constant="20" id="gLo-iW-eae"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="like-action"/>
+                                                    <connections>
+                                                        <action selector="onLike:" destination="8zs-h5-q1U" eventType="touchUpInside" id="F2p-cD-f2e"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -145,9 +151,11 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="handleLabel" destination="JHi-Xw-0qc" id="oqY-40-VIK"/>
+                                            <outlet property="likeButton" destination="roT-gN-nq8" id="g9l-Uz-W4x"/>
                                             <outlet property="likeLabel" destination="Fwg-OU-fzR" id="Hod-Ou-n4c"/>
                                             <outlet property="nameLabel" destination="hYH-Uj-eLF" id="s0q-5X-Gx6"/>
                                             <outlet property="profileImageView" destination="iLy-vE-tY2" id="bUa-1k-c52"/>
+                                            <outlet property="retweetButton" destination="9dD-n3-0Ce" id="zCH-0q-UTm"/>
                                             <outlet property="retweetLabel" destination="Ar6-bW-dT1" id="kyj-7A-9At"/>
                                             <outlet property="tweetLabel" destination="VGa-gS-uFH" id="Dka-oW-FIx"/>
                                         </connections>

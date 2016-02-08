@@ -18,7 +18,11 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var retweetLabel: UILabel!
     @IBOutlet weak var likeLabel: UILabel!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
     
+    var isRetweet = false
+    var isLiked = false
     
     var tweet: Tweet! {
         didSet {
@@ -34,8 +38,29 @@ class TweetTableViewCell: UITableViewCell {
             profileImageView.layer.cornerRadius = 3
             profileImageView.clipsToBounds = true;
             
+            if (tweet.isLiked != nil) {
+                if (tweet.isLiked!) {
+                    likeButton.tintColor = UIColor.redColor()
+                    likeLabel.textColor = UIColor.redColor()
+                }
+                else {
+                    likeButton.tintColor = UIColor.grayColor()
+                    likeLabel.textColor = UIColor.grayColor()
+                }
+            }
+            if (tweet.isRetweeted != nil) {
+                if (tweet.isRetweeted!) {
+                    retweetButton.tintColor = UIColor.greenColor()
+                    retweetLabel.textColor = UIColor.greenColor()
+                }
+                else {
+                    retweetButton.tintColor = UIColor.grayColor()
+                    retweetLabel.textColor = UIColor.grayColor()
+                }
+            }
         }
     }
+
     
     
     override func awakeFromNib() {
@@ -43,7 +68,45 @@ class TweetTableViewCell: UITableViewCell {
         // Initialization code
         
     }
+    
+    @IBAction func onRetweet(sender: AnyObject) {
+        isRetweet = !isRetweet
+        
+        if (isRetweet) {
+            retweetButton.tintColor = UIColor.greenColor()
+            retweetLabel.textColor = UIColor.greenColor()
+            tweet.retweet = tweet.retweet! + 1
+            TwitterClient.sharedInstance.retweetMe(tweet.id!)
+        }
+        else {
+            retweetButton.tintColor = UIColor.grayColor()
+            retweetLabel.textColor = UIColor.grayColor()
+            tweet.retweet = tweet.retweet! - 1
+            TwitterClient.sharedInstance.unRetweetMe(tweet.id!)
+        }
+    }
 
+    
+    @IBAction func onLike(sender: AnyObject) {
+        isLiked = !isLiked
+        
+        
+        if (isLiked) {
+            likeButton.tintColor = UIColor.greenColor()
+            likeLabel.textColor = UIColor.greenColor()
+            print("test")
+            tweet.like = tweet.like! + 1
+            TwitterClient.sharedInstance.favoriteMe(tweet.id!)
+        }
+        else {
+            likeButton.tintColor = UIColor.grayColor()
+            likeLabel.textColor = UIColor.grayColor()
+            tweet.like = tweet.retweet! - 1
+            TwitterClient.sharedInstance.unFavoriteMe(tweet.id!)
+        }
+    }
+    
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         

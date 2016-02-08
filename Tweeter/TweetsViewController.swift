@@ -56,7 +56,7 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
         refresh(self)
     }
-    
+ 
     func refresh(sender:AnyObject) {
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
             self.tweets = tweets
