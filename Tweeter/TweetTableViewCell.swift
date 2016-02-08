@@ -101,7 +101,7 @@ class TweetTableViewCell: UITableViewCell {
         else {
             likeButton.tintColor = UIColor.grayColor()
             likeLabel.textColor = UIColor.grayColor()
-            tweet.like = tweet.retweet! - 1
+            tweet.like = tweet.like! - 1
             TwitterClient.sharedInstance.unFavoriteMe(tweet.id!)
         }
     }
