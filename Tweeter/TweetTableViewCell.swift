@@ -76,12 +76,16 @@ class TweetTableViewCell: UITableViewCell {
             retweetButton.tintColor = UIColor.greenColor()
             retweetLabel.textColor = UIColor.greenColor()
             tweet.retweet = tweet.retweet! + 1
+            retweetLabel.text = "\(tweet.retweet!)"
+
             TwitterClient.sharedInstance.retweetMe(tweet.id!)
         }
         else {
             retweetButton.tintColor = UIColor.grayColor()
             retweetLabel.textColor = UIColor.grayColor()
             tweet.retweet = tweet.retweet! - 1
+            retweetLabel.text = "\(tweet.retweet!)"
+
             TwitterClient.sharedInstance.unRetweetMe(tweet.id!)
         }
     }
@@ -96,12 +100,14 @@ class TweetTableViewCell: UITableViewCell {
             likeLabel.textColor = UIColor.greenColor()
             print("test")
             tweet.like = tweet.like! + 1
+            likeLabel.text = "\(tweet.like!)"
             TwitterClient.sharedInstance.favoriteMe(tweet.id!)
         }
         else {
             likeButton.tintColor = UIColor.grayColor()
             likeLabel.textColor = UIColor.grayColor()
             tweet.like = tweet.like! - 1
+            likeLabel.text = "\(tweet.like!)"
             TwitterClient.sharedInstance.unFavoriteMe(tweet.id!)
         }
     }
