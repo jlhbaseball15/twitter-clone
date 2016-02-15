@@ -20,6 +20,7 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var profileButton: UIButton!
     
     var isRetweet = false
     var isLiked = false

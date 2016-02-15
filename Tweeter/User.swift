@@ -17,6 +17,7 @@ class User: NSObject {
     var name: String?
     var screenName: String?
     var profileImageURL: NSURL?
+    var coverImageURL: NSURL?
     var tagline: String?
     var dictionary: NSDictionary
     var tweets: [Tweet]?
@@ -28,6 +29,11 @@ class User: NSObject {
         screenName = dictionary["screen_name"] as? String
         profileImageURL = NSURL(string: (dictionary["profile_image_url"] as? String)!)
         tagline = dictionary["description"] as? String
+        if dictionary["profile_banner_url"] != nil {
+            coverImageURL = NSURL(string: (dictionary["profile_banner_url"] as? String)!)
+        }
+        
+        
     }
     
     func logout() {
