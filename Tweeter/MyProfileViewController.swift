@@ -37,7 +37,11 @@ class MyProfileViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         profileImageView.layer.cornerRadius = 3
         profileImageView.clipsToBounds = true;
-
+        
+        TwitterClient.sharedInstance.userTimelineWithParams((User.currentUser?.screenName)!) { (tweets, error) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+        }
         
         
         // Do any additional setup after loading the view.
@@ -59,7 +63,7 @@ class MyProfileViewController: UIViewController,UITableViewDelegate,UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("myProfileTweetCell", forIndexPath: indexPath) as! profileTweetTableViewCell
         
         cell.tweet = tweets![indexPath.row]
         

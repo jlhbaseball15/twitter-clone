@@ -32,6 +32,9 @@ class User: NSObject {
         if dictionary["profile_banner_url"] != nil {
             coverImageURL = NSURL(string: (dictionary["profile_banner_url"] as? String)!)
         }
+        else {
+            coverImageURL = NSURL(string: "http://www.techandall.com/wp-content/uploads/2013/07/05.png")
+        }
         
         
     }

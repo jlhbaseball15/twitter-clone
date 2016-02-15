@@ -8,12 +8,30 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     var user: User?
+    var tweets: [Tweet]?
     
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var screennameLabel: UILabel!
+    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        nameLabel.text = user?.name!
+        screennameLabel.text = user?.screenName!
+        coverImageView.setImageWithURL((user?.coverImageURL!)!)
+        profileImageView.setImageWithURL((user?.profileImageURL)!)
+        
+        TwitterClient.sharedInstance.userTimelineWithParams((user?.screenName!)!) { (tweets, error) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -22,7 +40,26 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        if tweets != nil {
+            return (tweets?.count)!
+        }
+        else {
+            return 0
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("profileTweetCell", forIndexPath: indexPath) as! profileTweetTableViewCell
+        
+        cell.tweet = tweets![indexPath.row]
+        
+        return cell
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
