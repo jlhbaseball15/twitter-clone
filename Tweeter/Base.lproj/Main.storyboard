@@ -466,6 +466,10 @@
                         <constraints>
                             <constraint firstItem="y8Y-PJ-BDU" firstAttribute="top" secondItem="ZkK-uO-iRK" secondAttribute="bottom" id="MfP-ks-9DN"/>
                             <constraint firstItem="y8Y-PJ-BDU" firstAttribute="top" secondItem="ScX-gp-BEa" secondAttribute="bottom" id="PCN-73-iLl"/>
+                            <constraint firstItem="y8Y-PJ-BDU" firstAttribute="leading" secondItem="yvz-pC-nEo" secondAttribute="leading" id="ZF0-RG-PsC"/>
+                            <constraint firstItem="XZO-UR-O7m" firstAttribute="top" secondItem="y8Y-PJ-BDU" secondAttribute="bottom" id="dFp-R3-H2T"/>
+                            <constraint firstAttribute="trailing" secondItem="y8Y-PJ-BDU" secondAttribute="trailing" id="dMD-Dh-Ftt"/>
+                            <constraint firstItem="y8Y-PJ-BDU" firstAttribute="top" secondItem="ZkK-uO-iRK" secondAttribute="bottom" id="e0v-QQ-nPK"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -620,6 +624,6 @@
         <image name="retweet-action" width="75" height="72"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yfz-d8-NT7"/>
+        <segue reference="QRC-2T-NPR"/>
     </inferredMetricsTieBreakers>
 </document>
