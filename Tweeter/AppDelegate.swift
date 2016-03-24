@@ -5,6 +5,9 @@
 //  Created by John Henning on 2/2/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 
 import UIKit
 import CoreData
@@ -26,16 +29,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if User.currentUser != nil {
             print("current user detected")
-            var vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as UIViewController
-            window?.rootViewController = vc;
+            let vc = storyboard.instantiateViewControllerWithIdentifier("TweetsViewController") as UIViewController
+            window?.rootViewController = vc
         }
         
         return true
     }
     
     func userDidLogout() {
-        var vc = storyboard.instantiateInitialViewController()! as UIViewController
-        window?.rootViewController = vc;
+        let vc = storyboard.instantiateInitialViewController()! as UIViewController
+        window?.rootViewController = vc
 
     }
     
@@ -136,4 +139,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

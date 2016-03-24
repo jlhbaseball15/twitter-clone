@@ -5,6 +5,9 @@
 //  Created by John Henning on 2/3/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 import UIKit
 
 class Tweet: NSObject {
@@ -19,15 +22,15 @@ class Tweet: NSObject {
     var isRetweeted: Bool?
     
     init(dictionary: NSDictionary) {
-        user = User(dictionary: dictionary["user"] as! NSDictionary)
-        like = dictionary["favorite_count"] as! Int
+        user = User(dictionary: (dictionary["user"] as? NSDictionary)!)
+        like = dictionary["favorite_count"] as? Int
         
-        retweet = dictionary["retweet_count"] as! Int
+        retweet = dictionary["retweet_count"] as? Int
         
         text = dictionary["text"] as? String
         createdAtString = dictionary["created_at"] as? String
         
-        var formatter = NSDateFormatter()
+        let formatter = NSDateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         createdAt = formatter.dateFromString(createdAtString!)
         
@@ -41,7 +44,7 @@ class Tweet: NSObject {
     class func tweetsWithArray(array: [NSDictionary]) -> [Tweet] {
         var tweets = [Tweet]()
         
-        for dictionary in array{
+        for dictionary in array {
             tweets.append(Tweet(dictionary:  dictionary))
         }
         

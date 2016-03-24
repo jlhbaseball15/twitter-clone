@@ -5,6 +5,9 @@
 //  Created by John Henning on 2/3/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 
 import UIKit
 
@@ -31,8 +34,7 @@ class User: NSObject {
         tagline = dictionary["description"] as? String
         if dictionary["profile_banner_url"] != nil {
             coverImageURL = NSURL(string: (dictionary["profile_banner_url"] as? String)!)
-        }
-        else {
+        } else {
             coverImageURL = NSURL(string: "http://www.techandall.com/wp-content/uploads/2013/07/05.png")
         }
         
@@ -40,7 +42,7 @@ class User: NSObject {
     }
     
     func logout() {
-        User.currentUser = nil;
+        User.currentUser = nil
         TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
         
         NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
@@ -48,13 +50,13 @@ class User: NSObject {
     class var currentUser: User? {
         get {
             if _currentUser == nil {
-                do{
+                do {
                     let data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
                     if data != nil {
-                        let dictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0)) as! NSDictionary
-                        _currentUser = User(dictionary: dictionary)
+                        let dictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: 0)) as? NSDictionary
+                        _currentUser = User(dictionary: dictionary!)
                     }
-                }catch let error as NSError{
+                } catch let error as NSError {
                     //handle error
                     print("Error : \(error)")
                 }
@@ -67,10 +69,10 @@ class User: NSObject {
             _currentUser = user
             
             if _currentUser != nil {
-                do{
+                do {
                     let data = try NSJSONSerialization.dataWithJSONObject(user!.dictionary, options: NSJSONWritingOptions(rawValue: 0))
                     NSUserDefaults.standardUserDefaults().setObject(data, forKey: currentUserKey)
-                }catch let error as NSError{
+                } catch let error as NSError {
                     //handle error
                     NSUserDefaults.standardUserDefaults().setObject(nil, forKey: currentUserKey)
                     print("Error : \(error)")

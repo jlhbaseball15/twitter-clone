@@ -5,10 +5,13 @@
 //  Created by John Henning on 2/9/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 
 import UIKit
 
-class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var user: User?
     var tweets: [Tweet]?
     
@@ -40,22 +43,21 @@ class ProfileViewController: UIViewController,UITableViewDataSource,UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tweets != nil {
             return (tweets?.count)!
-        }
-        else {
+        } else {
             return 0
         }
         
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("profileTweetCell", forIndexPath: indexPath) as! profileTweetTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("profileTweetCell", forIndexPath: indexPath) as? ProfileTweetTableViewCell
         
-        cell.tweet = tweets![indexPath.row]
+        cell!.tweet = tweets![indexPath.row]
         
-        return cell
+        return cell!
     }
     
     

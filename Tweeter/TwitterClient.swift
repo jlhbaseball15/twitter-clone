@@ -5,6 +5,9 @@
 //  Created by John Henning on 2/3/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 
 import UIKit
 import BDBOAuth1Manager
@@ -26,7 +29,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         return Static.instance
     }
     
-    func composeTweet(tweet: String){
+    func composeTweet(tweet: String) {
         POST("https://api.twitter.com/1.1/statuses/update.json?status=\(tweet)", parameters: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
             print("tweet posted")
             }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
@@ -38,11 +41,11 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     
     
-    func userTimelineWithParams(screename: String, completion: (tweets: [Tweet]?, error: NSError?) -> ()){
+    func userTimelineWithParams(screename: String, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         GET("1.1/statuses/user_timeline.json?screen_name=\(screename)", parameters: nil, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
             print("user timeline: ")
             //print("user: \(response)")
-            var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            var tweets = Tweet.tweetsWithArray((response as? [NSDictionary])!)
             
             completion(tweets: tweets, error: nil)
             
@@ -53,11 +56,11 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func homeTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()){
+    func homeTimelineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         GET("1.1/statuses/home_timeline.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
             print("home timeline: ")
             //print("user: \(response)")
-            var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            let tweets = Tweet.tweetsWithArray((response as? [NSDictionary])!)
             
             completion(tweets: tweets, error: nil)
             
@@ -106,7 +109,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         requestSerializer.removeAccessToken()
         fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "tweeter://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) -> Void in
             print("Got the request token")
-            var authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
+            let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
             UIApplication.sharedApplication().openURL(authURL!)
             
             }) { (error: NSError!) -> Void in
@@ -116,7 +119,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
     
-    func openURL(url: NSURL){
+    func openURL(url: NSURL) {
         fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query), success: { (accessToken: BDBOAuth1Credential!) -> Void in
             print("Got access token")
             
@@ -124,7 +127,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             
             TwitterClient.sharedInstance.GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 print("It worked!!!")
-                var user = User(dictionary: response as! NSDictionary)
+                let user = User(dictionary: (response as? NSDictionary)!)
                 User.currentUser = user
                 print(user.name!)
                 self.loginCompletion?(user: user, error: nil)
@@ -133,9 +136,6 @@ class TwitterClient: BDBOAuth1SessionManager {
                     print("It did not work")
                     self.loginCompletion?(user: nil, error: error)
             })
-            
-            
-            
             
             }) { (error: NSError!) -> Void in
                 print("An error occurred")

@@ -6,9 +6,13 @@
 //  Copyright © 2016 John Henning. All rights reserved.
 //
 
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
+
 import UIKit
 
-class MyProfileViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class MyProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -36,7 +40,7 @@ class MyProfileViewController: UIViewController,UITableViewDelegate,UITableViewD
         coverImageView.setImageWithURL((User.currentUser?.coverImageURL)!)
         
         profileImageView.layer.cornerRadius = 3
-        profileImageView.clipsToBounds = true;
+        profileImageView.clipsToBounds = true
         
         TwitterClient.sharedInstance.userTimelineWithParams((User.currentUser?.screenName)!) { (tweets, error) -> () in
             self.tweets = tweets
@@ -52,22 +56,21 @@ class MyProfileViewController: UIViewController,UITableViewDelegate,UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tweets != nil {
             return (tweets?.count)!
-        }
-        else {
+        } else {
             return 0
         }
         
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("myProfileTweetCell", forIndexPath: indexPath) as! profileTweetTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("myProfileTweetCell", forIndexPath: indexPath) as? ProfileTweetTableViewCell
         
-        cell.tweet = tweets![indexPath.row]
+        cell!.tweet = tweets![indexPath.row]
         
-        return cell
+        return cell!
     }
     
     

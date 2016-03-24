@@ -5,12 +5,12 @@
 //  Created by John Henning on 2/5/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
-
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 import UIKit
 
 class TweetTableViewCell: UITableViewCell {
-    
-
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
@@ -37,24 +37,22 @@ class TweetTableViewCell: UITableViewCell {
 
             profileImageView.setImageWithURL((tweet.user?.profileImageURL)!)
             profileImageView.layer.cornerRadius = 3
-            profileImageView.clipsToBounds = true;
+            profileImageView.clipsToBounds = true
             
-            if (tweet.isLiked != nil) {
-                if (tweet.isLiked!) {
+            if tweet.isLiked != nil {
+                if tweet.isLiked! {
                     likeButton.tintColor = UIColor.redColor()
                     likeLabel.textColor = UIColor.redColor()
-                }
-                else {
+                } else {
                     likeButton.tintColor = UIColor.grayColor()
                     likeLabel.textColor = UIColor.grayColor()
                 }
             }
-            if (tweet.isRetweeted != nil) {
-                if (tweet.isRetweeted!) {
+            if tweet.isRetweeted != nil {
+                if tweet.isRetweeted! {
                     retweetButton.tintColor = UIColor.greenColor()
                     retweetLabel.textColor = UIColor.greenColor()
-                }
-                else {
+                } else {
                     retweetButton.tintColor = UIColor.grayColor()
                     retweetLabel.textColor = UIColor.grayColor()
                 }
@@ -73,15 +71,14 @@ class TweetTableViewCell: UITableViewCell {
     @IBAction func onRetweet(sender: AnyObject) {
         isRetweet = !isRetweet
         
-        if (isRetweet) {
+        if isRetweet {
             retweetButton.tintColor = UIColor.greenColor()
             retweetLabel.textColor = UIColor.greenColor()
             tweet.retweet = tweet.retweet! + 1
             retweetLabel.text = "\(tweet.retweet!)"
 
             TwitterClient.sharedInstance.retweetMe(tweet.id!)
-        }
-        else {
+        } else {
             retweetButton.tintColor = UIColor.grayColor()
             retweetLabel.textColor = UIColor.grayColor()
             tweet.retweet = tweet.retweet! - 1
@@ -96,15 +93,14 @@ class TweetTableViewCell: UITableViewCell {
         isLiked = !isLiked
         
         
-        if (isLiked) {
+        if isLiked {
             likeButton.tintColor = UIColor.greenColor()
             likeLabel.textColor = UIColor.greenColor()
             print("test")
             tweet.like = tweet.like! + 1
             likeLabel.text = "\(tweet.like!)"
             TwitterClient.sharedInstance.favoriteMe(tweet.id!)
-        }
-        else {
+        } else {
             likeButton.tintColor = UIColor.grayColor()
             likeLabel.textColor = UIColor.grayColor()
             tweet.like = tweet.like! - 1

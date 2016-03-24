@@ -5,10 +5,13 @@
 //  Created by John Henning on 2/4/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 
 import UIKit
 
-class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -34,7 +37,7 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
         userProfileImageView.setImageWithURL((User.currentUser?.profileImageURL!)!)
         userProfileImageView.layer.cornerRadius = 3
-        userProfileImageView.clipsToBounds = true;
+        userProfileImageView.clipsToBounds = true
         //userHandleLabel.text = User.currentUser?.screenName;
         //userNameLabel.text = User.currentUser?.name
         
@@ -58,7 +61,7 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
  
 
     
-    func refresh(sender:AnyObject) {
+    func refresh(sender: AnyObject) {
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
             self.tweets = tweets
             self.tableView.reloadData()
@@ -87,11 +90,11 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as? TweetTableViewCell
         
-        cell.tweet = tweets![indexPath.row]
+        cell!.tweet = tweets![indexPath.row]
         
-        return cell
+        return cell!
     }
     
     
@@ -104,16 +107,15 @@ class TweetsViewController: UIViewController,UITableViewDataSource,UITableViewDe
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if (segue.identifier == "detailsSegue"){
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
+        if segue.identifier == "detailsSegue" {
+            let cell = sender as? UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell!)
             let tweet = self.tweets[(indexPath?.row)!]
-            let detailedTweet = segue.destinationViewController as? detailsViewController
+            let detailedTweet = segue.destinationViewController as? DetailsViewController
             detailedTweet!.tweet = tweet
-        }
-        else if (segue.identifier == "tweetProfileSegue") {
-            let button = sender as! UIButton
-            let cell = button.superview?.superview as? UITableViewCell
+        } else if segue.identifier == "tweetProfileSegue" {
+            let button = sender as? UIButton
+            let cell = button!.superview?.superview as? UITableViewCell
             let indexPath = tableView.indexPathForCell(cell!)
             let user = self.tweets[(indexPath?.row)!].user
             let userProfile = segue.destinationViewController as? ProfileViewController

@@ -5,6 +5,9 @@
 //  Created by John Henning on 2/14/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 
 import UIKit
 
@@ -35,7 +38,7 @@ class ComposeTweetViewController: UIViewController {
     
     @IBAction func onEditingChanged(sender: AnyObject) {
         
-        if (tweetField.text?.characters.count > 140){
+        if tweetField.text?.characters.count > 140 {
             print("\(tweetField.text!.characters.count)")
             tweetField.text!.removeAtIndex(tweetField.text!.endIndex.predecessor())
             print("\(tweetField.text!.characters.count)")

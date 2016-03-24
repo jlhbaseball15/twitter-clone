@@ -5,7 +5,9 @@
 //  Created by John Henning on 2/2/16.
 //  Copyright © 2016 John Henning. All rights reserved.
 //
-
+// swiftlint:disable variable_name
+// swiftlint:disable trailing_whitespace
+// swiftlint:disable line_length
 import UIKit
 import BDBOAuth1Manager
 import AFNetworking
@@ -26,8 +28,6 @@ class ViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -38,4 +38,3 @@ class ViewController: UIViewController {
 
 
 }
-
