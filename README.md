@@ -88,8 +88,7 @@ GIF created with [GifGrabber](https://itunes.apple.com/us/app/gifgrabber/id66820
 ## Notes
 
 Describe any challenges encountered while building the app.
-
-
+- Implementing Compose tweet.
 
 
 ## License
