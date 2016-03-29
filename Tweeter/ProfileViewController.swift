@@ -25,6 +25,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.dataSource = self
         tableView.delegate = self
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 160
+        
         nameLabel.text = user?.name!
         screennameLabel.text = user?.screenName!
         coverImageView.setImageWithURL((user?.coverImageURL!)!)

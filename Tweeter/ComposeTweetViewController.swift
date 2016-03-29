@@ -30,7 +30,7 @@ class ComposeTweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func onSendTweet(sender: AnyObject) {
-        let status = tweetField.text!.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let status = tweetField.text!.stringByReplacingOccurrencesOfString(" ", withString: "%20", options: NSStringCompareOptions.LiteralSearch, range: nil).stringByReplacingOccurrencesOfString("#", withString: "%23", options: NSStringCompareOptions.LiteralSearch, range: nil)
 
         TwitterClient.sharedInstance.composeTweet(status)
         navigationController?.popToRootViewControllerAnimated(true)

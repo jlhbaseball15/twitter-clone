@@ -35,7 +35,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
                 print("error in posting tweet")
                 print(tweet)
-                print("\(error)")
+                print("\(error.localizedDescription)")
         }
     }
     
@@ -67,6 +67,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             
             }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
                 print("error getting home timeline")
+                print(error.localizedDescription)
                 completion(tweets: nil, error: error)
         })
     }
@@ -127,7 +128,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             
             TwitterClient.sharedInstance.GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
                 print("It worked!!!")
-                let user = User(dictionary: (response as? NSDictionary)!)
+                var user = User(dictionary: (response as? NSDictionary)!)
                 User.currentUser = user
                 print(user.name!)
                 self.loginCompletion?(user: user, error: nil)

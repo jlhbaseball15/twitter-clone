@@ -32,11 +32,16 @@ class DetailsViewController: UIViewController {
         retweetLabel.text = "\(tweet!.retweet!)"
         likeLabel.text = "\(tweet!.like!)"
         profileImageView.setImageWithURL((tweet?.user?.profileImageURL)!)
-        tweetLabel.text = tweet!.text
-        tweetLabel.sizeToFit()
         
+        tweetLabel.text = tweet!.text
+        tweetLabel.preferredMaxLayoutWidth = tweetLabel.frame.size.width
+        //tweetLabel.sizeToFit()
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
     }
 
     override func didReceiveMemoryWarning() {

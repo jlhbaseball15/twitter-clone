@@ -31,6 +31,9 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         tableView.delegate = self
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 160
+        
         screenNameLabel.text = User.currentUser?.screenName!
         screenNameLabel.sizeToFit()
         nameLabel.text = User.currentUser?.name!
